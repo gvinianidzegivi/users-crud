@@ -4,9 +4,7 @@ const { v4: randomId } = require("uuid");
 const getUser = (id) => store.find((user) => user.id === +id);
 const getUserIndex = (id) => store.findIndex((user) => user.id === +id);
 const getUserByEmail = (email) =>
-  store.find(
-    (user) => user.email.toLocaleLowerCase() === email.toLocaleLowerCase()
-  );
+  store.find((user) => user.email.toLowerCase() === email.toLowerCase());
 
 const getUsers = ({ id }) => {
   const data = id ? getUser(id) || [] : store;
@@ -64,7 +62,6 @@ const authUser = (payload) => {
 
 module.exports = {
   getUsers,
-  getUser,
   deleteUser,
   updateUser,
   createUser,
