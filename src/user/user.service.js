@@ -1,14 +1,17 @@
-let store = require("./user");
-const { v4: randomId } = require("uuid");
+const { v4: randomID } = require("uuid");
 
-const getUser = (id) => store.find((user) => user.id === +id);
+let store = require("./user");
+
+// helper functions
 const getUserIndex = (id) => store.findIndex((user) => user.id === +id);
 const getUserByEmail = (email) =>
   store.find((user) => user.email.toLowerCase() === email.toLowerCase());
 
-const getUsers = ({ id }) => {
-  const data = id ? getUser(id) || [] : store;
-  return data;
+const getUsers = () => store;
+
+const getUser = ({ id }) => {
+  const user = store.find((user) => user.id === +id);
+  return user;
 };
 
 const deleteUser = (id) => {
@@ -39,7 +42,7 @@ const createUser = (payload) => {
   if (user?.email) return { message: "User already exists" };
 
   // if user email not exists, add it in DB.
-  store.push({ id: randomId(), ...payload });
+  store.push({ id: randomID(), ...payload });
 
   return { message: "CREATED" };
 };
@@ -56,11 +59,12 @@ const authUser = (payload) => {
     user.password === password;
 
   return isCorrectUser
-    ? { token: randomId() }
+    ? { token: randomID() }
     : { message: "Password is incorrect" };
 };
 
 module.exports = {
+  getUser,
   getUsers,
   deleteUser,
   updateUser,

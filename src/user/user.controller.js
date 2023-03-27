@@ -1,9 +1,17 @@
 const UserService = require("./user.service");
 
 const getUsers = (req, res) => {
+  const data = UserService.getUsers();
+
+  return res.json({
+    data,
+  });
+};
+
+const getUser = (req, res) => {
   const { id } = req.params;
 
-  const data = UserService.getUsers({ id });
+  const data = UserService.getUser({ id });
 
   return res.json({
     data,
@@ -42,6 +50,7 @@ const authUser = (req, res) => {
 
 module.exports = {
   getUsers,
+  getUser,
   deleteUser,
   updateUser,
   createUser,
