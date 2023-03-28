@@ -6,6 +6,7 @@ let store = require("./user");
 const getUserIndex = (id) => store.findIndex((user) => user.id === +id);
 const getUserByEmail = (email) =>
   store.find((user) => user.email.toLowerCase() === email.toLowerCase());
+// helper functions
 
 const getUsers = () => store;
 
@@ -44,7 +45,7 @@ const createUser = (payload) => {
   // if user email not exists, add it in DB.
   store.push({ id: randomID(), ...payload });
 
-  return { message: "CREATED" };
+  return { message: "User is created" };
 };
 
 const authUser = (payload) => {
@@ -64,8 +65,8 @@ const authUser = (payload) => {
 };
 
 module.exports = {
-  getUser,
   getUsers,
+  getUser,
   deleteUser,
   updateUser,
   createUser,
