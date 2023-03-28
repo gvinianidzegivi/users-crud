@@ -45,7 +45,7 @@ const createUser = (payload) => {
   // if user email not exists, add it in DB.
   store.push({ id: randomID(), ...payload });
 
-  return { message: "User is created" };
+  return { message: "User created" };
 };
 
 const authUser = (payload) => {
